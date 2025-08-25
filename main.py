@@ -1,5 +1,6 @@
-def prinyboard():
-    print(f"0 | 1 | 2")
+def printboard(xState, zState):
+
+    print(f"{xState[0]?'X':(zState[0]?'0')} | 1 | 2")
     print(f"--|---|---")
     print(f"3 | 4 | 5")
     print(f"--|---|---")
@@ -12,5 +13,14 @@ if __name__ == "__main__":
     turn = 1 # 1 for X and 0 for O
 
     print("Welcome to to Tic Tac Toe")
-    print("X's chance")
-    prinyboard()
+    while(True):
+        printboard(xState, zState)
+        if(turn == 1):
+            print("X's chance")
+            value = int(input("please enter a value"))
+            xState[value] = 1
+        else:
+            print("X's chance")
+            value = int(input("please enter a value"))
+            zState[value] = 1
+        break
