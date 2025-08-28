@@ -1,15 +1,48 @@
 import tkinter # tkinter is the standard GUI library for Python
 
 def set_title(row, column):
-    pass
+    global curr_player
+
+    if game_over: # check if the game is over
+        return
+
+    if board[row][column]["text"] != "": 
+        # alraedy taken spot
+        return
+
+    board[row][column]["text"] = curr_player # mark the board
+
+    if curr_player == playerO: # switch players
+        curr_player = playerX
+    else:
+        curr_player = playerO
+
+    label["text"] = curr_player + "s turn" # update the label
+
+# check winner
+    check_winner()
+
+def check_winner():
+    global turns, game_over
+    turns += 1
+
+    # horizonttally check 3 rows
+    for row in range(3):
+        if (board[row][0]["text"] == board[row][1]["text"] == board[row][2]["text"]
+            and board[row][0]["text"] != ""):
+            label.config(text=board[row][0]["text"] + " is the winner!", foreground=color_yellow)
+            for column in range(3):
+                board[row][column].config(background=color_light_gray)
+            game_over = True
+            return
 
 def new_game():
     pass
 
 #game setup
-player = "X"
-player0 = "O"
-curr_player = player
+playerX = "X"
+playerO = "O"
+curr_player = playerX
 board = [[0, 0, 0],
          [0, 0, 0],
          [0, 0, 0]]
@@ -18,6 +51,9 @@ color_blue = "#014D66"
 color_yellow = "#DADA05"
 color_gray = "#272525"
 color_light_gray = "#D3D3D3"
+
+turns = 0
+game_over = False
 
 #window setup
 window = tkinter.Tk()# create the game window
@@ -32,7 +68,7 @@ label.grid(row=0, column=0,columnspan=3, sticky= "we")
 
 for row in range(3):
     for column in range(3):
-        board[row][column] = tkinter.Button(frame, text="X", font=("consolas", 50, "bold"), 
+        board[row][column] = tkinter.Button(frame, text="", font=("consolas", 50, "bold"), 
                                         background=color_gray, foreground=color_blue, width=4, height=1,
                                         command=lambda row=row, column= column: set_title(row, column))
         board[row][column].grid(row=row+1, column=column)
