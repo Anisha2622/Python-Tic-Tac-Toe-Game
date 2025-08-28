@@ -36,6 +36,35 @@ def check_winner():
             game_over = True
             return
 
+# vertically check 3 columns
+    for column in range(3):
+        if (board[0][column]["text"] == board[1][column]["text"] == board[2][column]["text"]
+            and board[0][column]["text"] != ""):
+            label.config(text=board[0][column]["text"] + " is the winner!", foreground=color_yellow)
+            for row in range(3):
+                board[row][column].config(background=color_light_gray)
+            game_over = True
+            return
+        
+# diagonally check 
+    if (board[0][0]["text"] == board[1][1]["text"] == board[2][2]["text"]
+        and board[0][0]["text"] != ""):
+        label.config(text=board[0][0]["text"] + " is the winner!", foreground=color_yellow)
+        for i in range(3):
+            board[i][i].config(background=color_light_gray)
+        game_over = True
+        return
+
+#anti-diagonally check
+    if (board[0][2]["text"] == board[1][1]["text"] == board[2][0]["text"]
+        and board[0][2]["text"] != ""):
+        label.config(text=board[0][0]["text"] + " is the winner!", foreground=color_yellow)
+        board[0][2].config(foreground=color_yellow, background=color_light_gray)
+        board[1][1].config(foreground=color_yellow, background=color_light_gray)
+        board[2][0].config(foreground=color_yellow, background=color_light_gray)
+        game_over = True
+        return
+
 def new_game():
     pass
 
