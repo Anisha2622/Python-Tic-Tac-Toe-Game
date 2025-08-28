@@ -32,7 +32,7 @@ label.grid(row=0, column=0,columnspan=3, sticky= "we")
 
 for row in range(3):
     for column in range(3):
-        board[row][column] = tkinter.Button(frame, text="", font=("consolas", 50, "bold"), 
+        board[row][column] = tkinter.Button(frame, text="X", font=("consolas", 50, "bold"), 
                                         background=color_gray, foreground=color_blue, width=4, height=1,
                                         command=lambda row=row, column= column: set_title(row, column))
         board[row][column].grid(row=row+1, column=column)
