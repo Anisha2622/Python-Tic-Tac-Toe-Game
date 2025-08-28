@@ -2,6 +2,10 @@ import tkinter # tkinter is the standard GUI library for Python
 
 def set_title(row, column):
     pass
+
+def new_game():
+    pass
+
 #game setup
 player = "X"
 player0 = "O"
@@ -12,7 +16,7 @@ board = [[0, 0, 0],
 
 color_blue = "#014D66"
 color_yellow = "#DADA05"
-color_gray = "#808080"
+color_gray = "#272525"
 color_light_gray = "#D3D3D3"
 
 #window setup
@@ -24,7 +28,7 @@ frame = tkinter.Frame(window)
 label = tkinter.Label(frame, text=curr_player+"s turn", font=("consolas", 20), background=color_light_gray,
                       foreground="white")
 
-label.grid(row=0, column=0)
+label.grid(row=0, column=0,columnspan=3, sticky= "we")
 
 for row in range(3):
     for column in range(3):
@@ -33,7 +37,25 @@ for row in range(3):
                                         command=lambda row=row, column= column: set_title(row, column))
         board[row][column].grid(row=row+1, column=column)
        
+button = tkinter.Button(frame, text="Restart", font=("consolas", 20), background=color_gray,
+                        foreground="white", command=new_game)
+
+button.grid(row=4, column=0, columnspan=3, sticky="we")
 
 frame.pack()
+
+# center the window on the screen
+window.update()
+window_width = window.winfo_width()
+window_height = window.winfo_height()
+screen_width = window.winfo_screenwidth()
+screen_height = window.winfo_screenheight()
+
+window_x = int((screen_width / 2) - (window_width / 2))
+window_y = int((screen_height / 2) - (window_height / 2))
+
+# format "(width)x(height)+(x)+(y)"
+window.geometry(f"{window_width}x{window_height}+{window_x}+{window_y}")
+
 
 window.mainloop()# start the event loop
