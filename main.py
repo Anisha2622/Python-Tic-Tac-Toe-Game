@@ -75,7 +75,8 @@ def new_game():
 
     turns = 0
     game_over = False
-    label["text"] = curr_player + "s turn"
+
+    label.config(text=curr_player + "s turn", foreground="white")
 
     for row in range(3):
         for column in range(3):
